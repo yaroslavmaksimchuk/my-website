@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма для отправки имени на почту</title>
+</head>
+<body>
+
+    <h2>Введите ваше имя:</h2>
+    <form id="myForm" action="send_email.php" method="post">
+        <input type="text" name="name" placeholder="Введите ваше имя" required>
+        <br><br>
+        <input type="submit" value="Отправить">
+    </form>
+
+</body>
+</html>
+<script>
+    // Дополнительный JavaScript код может быть добавлен здесь
+</script>
+<?php
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $name = $_POST['name'];
+    
+    // Адрес, на который вы хотите отправить электронное письмо
+    $to_email = "yaroslavmaksimchuk27@gmail.com";
+    $subject = "Новое имя от посетителя вашего сайта";
+    $body = "Имя: $name";
+    $headers = "From: отправитель@example.com";
+
+    // Отправка письма
+    if (mail($to_email, $subject, $body, $headers)) {
+        echo "Имя успешно отправлено на указанный адрес электронной почты.";
+    } else {
+        echo "Ошибка при отправке имени на почту.";
+    }
+}
+?>
